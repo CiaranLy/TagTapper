@@ -3,6 +3,7 @@ package com.example.tagtapper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -19,7 +20,9 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        TextView textView = findViewById(R.id.text);
+        TextView textView = findViewById(R.id.welcomeText);
+        EditText email = findViewById(R.id.loginEmail);
+        EditText password = findViewById(R.id.loginPassword);
         Button button = findViewById(R.id.button);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -28,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
                 textView.setText("Button clicked!");
             }
         });
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
