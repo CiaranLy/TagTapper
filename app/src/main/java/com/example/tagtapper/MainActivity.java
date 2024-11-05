@@ -3,7 +3,6 @@ package com.example.tagtapper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -21,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView textView = findViewById(R.id.welcomeText);
-        Button button = findViewById(R.id.button);
+        Button button = findViewById(R.id.addSheep);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
