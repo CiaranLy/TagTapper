@@ -21,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView textView = findViewById(R.id.welcomeText);
-        EditText email = findViewById(R.id.loginEmail);
-        EditText password = findViewById(R.id.loginPassword);
         Button button = findViewById(R.id.button);
 
         button.setOnClickListener(new View.OnClickListener() {
