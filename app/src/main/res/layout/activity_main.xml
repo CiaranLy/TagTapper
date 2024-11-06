@@ -9,35 +9,42 @@
 
     <LinearLayout
         android:id="@+id/topBar"
-        android:layout_width="409dp"
-        android:layout_height="111dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:orientation="horizontal"
+        android:background="@android:color/holo_green_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
+            android:layout_width="15dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginLeft="10dp"
             tools:srcCompat="@tools:sample/avatars" />
-
+        <View
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"/>
         <Button
             android:id="@+id/addSheep"
-            android:layout_width="421dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="Button" />
+            android:layout_marginRight="10dp"
+            android:text="Add/Search" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/mainDisplay"
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="618dp"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topBar"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/topBar"
+        app:layout_constraintBottom_toBottomOf="parent">
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
