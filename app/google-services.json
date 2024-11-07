@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1024739901407",
+    "firebase_url": "https://tagtapper-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "tagtapper",
+    "storage_bucket": "tagtapper.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1024739901407:android:5eb4f3c03110a7f7a7ce6a",
+        "android_client_info": {
+          "package_name": "com.example.tagtapper"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEIE2DdrXsJRYSiCFlW0MSOOrK9_G0qiY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
