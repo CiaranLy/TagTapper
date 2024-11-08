@@ -1,6 +1,5 @@
 package com.example.tagtapper;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,7 +31,7 @@ public class SearchActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.listView);
 
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
         listView.setAdapter(arrayAdapter);
 
         imageView = findViewById(R.id.backButton);
