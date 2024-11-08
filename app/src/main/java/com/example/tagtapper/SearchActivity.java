@@ -1,9 +1,12 @@
 package com.example.tagtapper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -15,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class SearchActivity extends AppCompatActivity {
 
+    ImageView imageView;
     ListView listView;
     String[] list = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
 
@@ -30,6 +34,14 @@ public class SearchActivity extends AppCompatActivity {
 
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
         listView.setAdapter(arrayAdapter);
+
+        imageView = findViewById(R.id.backButton);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
