@@ -3,7 +3,6 @@ package com.example.tagtapper;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -17,11 +16,21 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class SearchActivity extends AppCompatActivity {
 
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference animalsListReference = database.getReference("Animals");
     String searchText;
-    String[] list = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
-
+    List<String> list = new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
 
     @Override
@@ -29,6 +38,8 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_search);
+
+        resetList();// get the list of animals from firebase
 
         ImageView backButton = findViewById(R.id.backButton);
         ImageView addButton = findViewById(R.id.addButton);
@@ -82,6 +93,8 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Handle the "OK" button action here
+                        animalsListReference.child(text).setValue("");
+                        resetList();// get the new list of animals
                         dialog.dismiss();
                     }
                 })
@@ -96,5 +109,20 @@ public class SearchActivity extends AppCompatActivity {
 
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    private void resetList(){
+        animalsListReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    list.add(snapshot.getKey());
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Failed to read value: " + databaseError.toException());
+            }
+        });
     }
 }
