@@ -41,7 +41,7 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <Button
-            android:id="@+id/addSheep"
+            android:id="@+id/addButton"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -52,12 +52,45 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/mainDisplay"
+        android:id="@+id/searchBar"
         android:layout_width="match_parent"
-        android:layout_height="618dp"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:background="@android:color/holo_green_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topBar">
+
+
+        <SearchView
+            android:id="@+id/action_search"
+            android:title="Search"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_background"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:icon="@android:drawable/ic_menu_search"
+            app:actionViewClass="androidx.appcompat.widget.SearchView"
+            app:showAsAction="ifRoom|collapseActionView" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/topBar"
+        app:layout_constraintTop_toBottomOf="@+id/searchBar"
         app:layout_constraintBottom_toBottomOf="parent">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
