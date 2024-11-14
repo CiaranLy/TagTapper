@@ -1,7 +1,6 @@
 package com.example.tagtapper;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -60,8 +59,7 @@ public class MainActivity extends AppCompatActivity {
         sidebarTrigger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, GroupListActivity.class);
-                startActivity(intent);
+                // Handle the sidebar trigger click event here
             }
         });
 
