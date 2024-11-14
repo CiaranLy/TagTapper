@@ -1,10 +1,12 @@
 package com.example.tagtapper;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         resetList();// get the list of animals from firebase
 
         Button addButton = findViewById(R.id.addButton);
+        ImageView sidebarTrigger = findViewById(R.id.sidebarTrigger);
         ListView listView = findViewById(R.id.listView);
         SearchView searchView = findViewById(R.id.action_search);
 
@@ -51,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 searchAlert(searchText);
+            }
+        });
+
+        sidebarTrigger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GroupListActivity.class);
+                startActivity(intent);
             }
         });
 
