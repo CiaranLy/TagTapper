@@ -2,6 +2,7 @@ package com.example.tagtapper;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -10,7 +11,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -32,12 +33,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle toggle;
-
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference animalsListReference = database.getReference("Animals");
+    DatabaseReference groupListReference = database.getReference("Groups");
     String searchText;
-    List<String> list = new ArrayList<>();
+    List<String> animalList = new ArrayList<>();
+    List<String> groupList = new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
 
     @Override
@@ -46,18 +47,19 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        resetList();// get the list of animals from firebase
+        resetList();// get the list of animals and groups from firebase
 
         Button addButton = findViewById(R.id.addButton);
         ImageView sidebarTrigger = findViewById(R.id.sidebarTrigger);
         ListView listView = findViewById(R.id.listView);
         SearchView searchView = findViewById(R.id.action_search);
 
-        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, animalList);
         listView.setAdapter(arrayAdapter);
 
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.navigation_view);
+        Menu menu = navigationView.getMenu();
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
         sidebarTrigger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawerLayout .openDrawer(GravityCompat.START);
+                drawerLayout.openDrawer(GravityCompat.START);
+                refreshMenu(menu);
             }
         });
 
@@ -125,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    list.add(snapshot.getKey());
+                    animalList.add(snapshot.getKey());
                 }
             }
             @Override
@@ -133,5 +136,26 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("Failed to read value: " + databaseError.toException());
             }
         });
+
+        groupListReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    groupList.add(snapshot.getKey());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println("Failed to read value: " + databaseError.toException());
+            }
+        });
+    }
+
+    private void refreshMenu(Menu menu){
+        menu.clear();
+        for (String group : groupList) {
+            menu.add(group);
+        }
     }
 }
